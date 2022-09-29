@@ -106,12 +106,16 @@ for (name_data_ID in name_data){
       join$complete <- lapply(c(join$complete),function(X){c(1)})
       join$covariance <- c(0)
       
+      # Run generative encoding
       gcode.main <- gcode::gcode(data_list = list(cbind(main_data[train_ids,,drop=F])), config = config, join = join)
       
+      # Extract alpha, the internal sample parameter in the gcode model
       sample_encoder <- gcode.main$main.parameters$alpha_signal[[1]]
       
+      # Run a mixture model over alpha
       mclust_sample_encoder <- mclust::Mclust(t(sample_encoder))
       
+      # Generate new samples of alpha, now called A
       sample_mclust <- function(mclust_sample_encoder,N_sample){
         
         return_vec <- c()
@@ -126,14 +130,18 @@ for (name_data_ID in name_data){
         return_vec
       }
       
+      # Generate A
       extended_sample_decoder <- sample_mclust(mclust_sample_encoder = mclust_sample_encoder, N_sample = 1000)
       
+      # From A and alpha, generate new samples
       extended_x <- (extended_sample_decoder)%*%MASS::ginv(t(extended_sample_decoder)%*%(extended_sample_decoder))%*%sample_encoder%*%as.matrix(x[train_ids,,drop=F])
       extended_y <- (extended_sample_decoder)%*%MASS::ginv(t(extended_sample_decoder)%*%(extended_sample_decoder))%*%sample_encoder%*%as.matrix(y[train_ids,,drop=F])
       
+      # Run regression on observed data
       original_model <- glmnet::cv.glmnet(x=(x[train_ids,]), y=y[train_ids,])
       original_pred <- predict(object = original_model,newx = (x[test_ids,]))
       
+      # Run regression on generated data
       extended_model <- glmnet::cv.glmnet(x=(extended_x), y=as.matrix(extended_y))
       extended_pred <- predict(object = extended_model,newx = (x[test_ids,]))
       

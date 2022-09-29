@@ -14,6 +14,8 @@ mnist_train <- head(mnist, 60000)
 mnist_test <- tail(mnist, 10000)
 
 
+# Run internal function from helper_functions.R
+# Generates new samples based on data input for 1,000 new samples with the dimensions reduced to 10
 
 test_mnist <- generate_new_samples(data_list = list(mnist[,-785],
                                                    as.matrix(mltools::one_hot(data.table::data.table(data.frame(mnist[,785])))))
@@ -26,17 +28,19 @@ save(list=c("new_mnist"),file="~/Documents/main_files/AskExplain/Q3_2022/neurips
 
 png("~/Documents/main_files/AskExplain/Q3_2022/neurips_mental_data/figures/mnist/all_mnist.png",width = 3000, height = 1400)
 
+# Sort through predicted labels by taking the top scores
 ids_main <- do.call('rbind',lapply(c(1:dim(new_mnist[[2]])[1]),function(Y){
   X <- new_mnist[[2]][Y,]
   sorted_X <- sort(X,decreasing = T)
   c(Y,which(X==max(X)),sorted_X[1] - sorted_X[2])
   }))
 
-
+# Reformat the predicted labels
 ids_main <-lapply(c(1:10),function(X){
   ids_main[ids_main[,2]==X,]
 })
 
+# Plot the digit figures
 par(mfcol=c(5,10))
 for (i in c(1:10)){
   set.seed(i)
