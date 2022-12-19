@@ -1,12 +1,4 @@
-# remove.packages("gcode")
-# devtools::install_github("AskExplain/gcode_R")
-# devtools::document("~/Documents/main_files/AskExplain/Q4_2022/gcode/packages/explore_gcode_fix_bug/gcode_R-beta_test_v2022.3/")
-# devtools::install_local("~/Documents/main_files/AskExplain/Q4_2022/gcode/packages/explore_gcode_fix_bug/gcode_R-beta_test_v2022.3/")
-# 
-# remove.packages("GeneCodeR")
-# devtools::document("~/Documents/main_files/AskExplain/Q4_2022/gcode/packages/explore_gcode_fix_bug/GeneCodeR-main/")
-# devtools::install_local("~/Documents/main_files/AskExplain/Q4_2022/gcode/packages/explore_gcode_fix_bug/GeneCodeR-main/")
-
+devtools::install_github("AskExplain/gcode_R")
 
 store_scores <- c()
 
