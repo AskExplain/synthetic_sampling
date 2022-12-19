@@ -1,9 +1,5 @@
-# sampling4sharing
-Generating synthetic data samples for data sharing
+# Synthetic Sampling
+Generating synthetic data samples for sharing and distribution where privacy and security is important
 
-
-Here, the ten MNIST digits are sampled, that is synthetically generated, and then the top 5 images are selected based on scores that lead to the "well-characterisation" of the digit
-
-
-![Results for sample2share](https://raw.githubusercontent.com/AskExplain/sampling4sharing/main/images/mnist_sample2share.png)
-
+arXiv preprint found here:
+https://arxiv.org/abs/2209.06113
