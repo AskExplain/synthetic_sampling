@@ -1,4 +1,13 @@
 devtools::install_github("AskExplain/gcode_R")
+library(gcode)
+
+install.packages("mclust")
+library(mclust)
+install.packages("mlbench")
+library(mlbench)
+install.packages("pdfCluster")
+library(pdfCluster)
+
 
 store_scores <- c()
 
@@ -15,9 +24,6 @@ config$batch_size <- 100
 config$n.cores <- 6
 
 
-library(mclust)
-library(mlbench)
-library(pdfCluster)
 name_data = (c("wine","oliveoil","Glass","thyroid","wdbc","PimaIndiansDiabetes","BostonHousing","Ionosphere"))
 
 for (name_data_ID in name_data){
