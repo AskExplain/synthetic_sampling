@@ -1,11 +1,4 @@
-# remove.packages("gcode")
-# devtools::install_github("AskExplain/gcode_R")
-# devtools::document("~/Documents/main_files/AskExplain/Q4_2022/gcode/packages/explore_gcode_fix_bug/gcode_R-beta_test_v2022.3/")
-# devtools::install_local("~/Documents/main_files/AskExplain/Q4_2022/gcode/packages/explore_gcode_fix_bug/gcode_R-beta_test_v2022.3/")
-# 
-# remove.packages("GeneCodeR")
-# devtools::document("~/Documents/main_files/AskExplain/Q4_2022/gcode/packages/explore_gcode_fix_bug/GeneCodeR-main/")
-# devtools::install_local("~/Documents/main_files/AskExplain/Q4_2022/gcode/packages/explore_gcode_fix_bug/GeneCodeR-main/")
+devtools::install_github("AskExplain/gcode_R")
 
 
 store_scores <- c()
@@ -23,9 +16,14 @@ config$batch_size <- 100
 config$n.cores <- 6
 
 
+
+install.packages("mclust")
 library(mclust)
+install.packages("mlbench")
 library(mlbench)
+install.packages("pdfCluster")
 library(pdfCluster)
+
 name_data = (c("wine","oliveoil","Glass","thyroid","wdbc","PimaIndiansDiabetes","BostonHousing","Ionosphere"))
 
 for (name_data_ID in name_data){
